@@ -18,7 +18,7 @@ int main(void)
     unsigned int num;               // Variable for the generated number
     int n;
 
-    struct wind_data wind;
+    struct wind_data wind_udp;
 
     if (UDP_init(UDP_PORT) < 0) // Initialize the socket with UDP port number 54321
     {
@@ -38,7 +38,7 @@ int main(void)
             {
                 // Request to generate a new number
 
-                if (wind(wind.wind_speed, wind.wind_direction) < 0)
+                if (wind(wind_udp.wind_speed, wind_udp.wind_direction) < 0)
                 {
                     printf("Invalid values\n\r");
                     return -1;
