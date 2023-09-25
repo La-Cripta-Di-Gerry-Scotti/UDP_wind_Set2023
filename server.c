@@ -6,36 +6,10 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "UDP.H"
+#include "UDP.h"
 #include "wind.h"
 
 #define UDP_PORT 54321
-
-struct wind_data{
-    float wind_speed;
-    int wind_direction;
-};
-
-int wind(float *wind_speed, int *wind_direction)
-{
-    int h = 0;
-    while(h == 0)
-    {
-        struct wind_data wind_data;
-        wind_data.wind_speed = random();
-        wind_data.wind_direction = random();
-
-        if(wind_data.wind_speed < 0 && wind_data.wind_speed > 140 && wind_data.wind_direction < 0 && wind_data.wind_direction > 360)
-        {
-            h = 1;
-        }
-        else
-        {
-            h = 3;
-        }
-    }
-    return 0;
-}
 
 
 int main(void)
@@ -45,6 +19,8 @@ int main(void)
     unsigned short port_number;	    //variabile che memorizzera  la porta del client
     unsigned int num;               //variabile per numero da generare
     int n;
+
+    struct wind_data wind;
 
     if (UDP_init(UDP_PORT) < 0) // inizializzazione socket con porta UDP numero 54321
     {
@@ -64,9 +40,13 @@ int main(void)
             {
                 // richiesta di generazione di un nuovo numero
 
-                num = sequence();
+                if (wind(wind.wind_speed, wind.wind_direction) < 0)
+                {
+                    printf("Valori non validi\n\r");
+                    return -1;
+                }
 
-                UDP_send (ip_address, port_number, (void*)&num, sizeof(unsigned int));
+                UDP_send(ip_address, port_number, (void *) &num, sizeof(unsigned int));
 
                 printf("...inviato numero %u.\r\n", num);
             }

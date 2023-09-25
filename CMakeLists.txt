@@ -5,4 +5,8 @@ set(CMAKE_C_STANDARD 23)
 
 add_executable(Wind_UDP_Cunardi_2392023
         server.c
-        client.c)
+        client.c
+        wind.h
+        UDP.c
+        UDP.h
+)

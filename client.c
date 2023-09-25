@@ -4,9 +4,11 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
-#include "UDP.H"
+#include "UDP.h"
+
+
 #define TIMEOUT 1*CLOCKS_PER_SEC // 1 secondo
-#define UDP_PORT 23365
+#define UDP_PORT 54321
 
 int main(int argc, char* argv[])
 {
