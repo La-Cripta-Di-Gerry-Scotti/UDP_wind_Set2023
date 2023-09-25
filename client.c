@@ -6,48 +6,53 @@
 #include <string.h>
 #include "UDP.h"
 
-
-#define TIMEOUT 1*CLOCKS_PER_SEC // 1 secondo
+#define TIMEOUT 1*CLOCKS_PER_SEC // 1 second
 #define UDP_PORT 54321
 
 int main(int argc, char* argv[])
 {
-    unsigned char buffer[1024] = "ASK"; // stringa di richiesta
+    unsigned char buffer[1024] = "ASK"; // Request string
     unsigned long ip_address;
     unsigned short port_number;
     unsigned long start, now;
     unsigned int *num = (unsigned int*)buffer;
+
     if (argc < 2)
     {
-        printf("Deve essere fornito l'indirizzo IP del server!\r\n");
+        printf("The server's IP address must be provided!\r\n");
         return -1;
     }
-    // inizializzazione socket con numero di porta UDP arbitrario
+
+    // Initialize the socket with an arbitrary UDP port number
     if (UDP_init(0) < 0)
     {
-        printf("Errore inizializzazione socket!\r\n");
+        printf("Socket initialization error!\r\n");
         return -1;
     }
+
     ip_address = IP_to_bin(argv[1]);
     port_number = UDP_PORT;
-    // trasmissione richiesta al server
+
+    // Transmit request to the server
     UDP_send(ip_address, port_number, buffer, strlen((char*)buffer));
-    start = clock(); // tempo iniziale attesa
-    now = clock(); // tempo attuale
-    // ciclo di attesa risposta per al massimo un tempo pari a TIMEOUT
+    start = clock(); // Initial waiting time
+    now = clock(); // Current time
+
+    // Waiting loop for a response for a maximum time of TIMEOUT
     while ((now - start) < TIMEOUT)
     {
-        if (UDP_receive( &ip_address, &port_number, buffer, sizeof(buffer)) == sizeof(unsigned int))
+        if (UDP_receive(&ip_address, &port_number, buffer, sizeof(buffer)) == sizeof(unsigned int))
         {
-            // ricevuto un datagram della dimensione corretta visualizzazione numero
-            printf("Ricevuto numero %u.\r\n", *num);
+            // Received a datagram of the correct size, display the number
+            printf("Received number %u.\r\n", *num);
             UDP_close();
             return 0;
         }
-        now = clock(); // aggiornamento tempo attuale
+        now = clock(); // Update current time
     }
-    // trascorso un tempo pari a TIMEOUT senza ricevere risposta
-    printf("Nessuna risposta ricevuta!\r\n");
+
+    // No response received after a time equal to TIMEOUT
+    printf("No response received!\r\n");
     UDP_close();
     return -1;
 }
