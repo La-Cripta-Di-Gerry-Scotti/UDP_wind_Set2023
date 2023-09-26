@@ -46,7 +46,7 @@ int main(void)
 
                 UDP_send(ip_address, port_number, (void *) &num, sizeof(unsigned int));
 
-                printf("...sent number %u.\r\n", num);
+                printf("sent number %u.\r\n", num);
             }
         }
     }
