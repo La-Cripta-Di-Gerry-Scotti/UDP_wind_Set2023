@@ -1,4 +1,4 @@
-# Wind_UDP_Cunardi_2392023
+# UDP_wind_Set2023
 
 
 Un circolo nautico utilizza un dispositivo con sistema operativo Linux per interfacciare un sensore in grado di misurare velocità (Km/h) e direzione (°) del vento: il produttore del sensore rende disponibile un driver che permette di acquisire i valori misurati in tempo reale invocando la seguente funzione in linguaggio C che restituisce il valore 0 in caso di valori validi, -1 altrimenti:
