@@ -20,7 +20,7 @@ int UDP_init(unsigned short port_number)
     struct sockaddr_in add; // struttura per indirizzo
 
     // apertura socket UDP non bloccante
-    if ((socket_id = socket( AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, IPPROTO_UDP)) < 0)
+    if ((socket_id = socket( AF_INET, SOCK_DGRAM /*| SOCK_NONBLOCK*/, IPPROTO_UDP)) < 0)
     {
         return -1;
     }

@@ -16,8 +16,8 @@ int wind(float *wind_speed, int *wind_direction)
     int h = 0;
     while(h == 0)
     {
-        *wind_speed = rand()%350;
-        *wind_direction = rand()%360;
+        *wind_speed = (float)(rand()%350);
+        *wind_direction = (float)(rand()%360);
 
         if(*wind_speed < 0 && *wind_speed > 140 && *wind_direction < 0 && *wind_direction > 360)
         {

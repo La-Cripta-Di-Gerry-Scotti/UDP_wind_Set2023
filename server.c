@@ -15,7 +15,7 @@ int main(void)
     unsigned char buffer[1024];     // Reception buffer
     unsigned long ip_address;       // Variable to store the client's IP address
     unsigned short port_number;     // Variable to store the client's port number
-    unsigned int num;               // Variable for the generated number
+    //unsigned int num;               // Variable for the generated number
     int n;
 
     struct wind_data wind_udp;
@@ -44,9 +44,9 @@ int main(void)
                     return -1;
                 }
 
-                UDP_send(ip_address, port_number, (void *) &num, sizeof(unsigned int));
+                UDP_send(ip_address, port_number, (void*)&wind_udp, sizeof(wind_udp));
 
-                printf("sent number %u.\r\n", num);
+                //printf("sent number %u.\r\n", num);
             }
         }
     }
